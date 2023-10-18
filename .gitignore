@@ -1,0 +1,6 @@
+In terminal of project folder
+>> flask shell
+>> db.create_all()
+To create a database
+
+To see the records open "sqlite viewer" and drag and drop "./instance/todo.db" file 
