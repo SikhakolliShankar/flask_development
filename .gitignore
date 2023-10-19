@@ -4,3 +4,13 @@ In terminal of project folder
 To create a database
 
 To see the records open "sqlite viewer" and drag and drop "./instance/todo.db" file 
+
+>> app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///todo.db"
+>> db = SQLAlchemy(app)
+>> db.session.add(todo)                                     
+>> db.session.commit()   
+                                     
+>> allTodo = Todo.query.all()
+
+Jinja shortcuts
+--> jfor -- Jinja For loop

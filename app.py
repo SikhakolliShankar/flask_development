@@ -21,9 +21,17 @@ class Todo(db.Model):
 @app.route('/')
 def htmlfile():
     todo = Todo(title="First Todo", desc="Invest on time")
-    db.session.add(todo)
-    db.session.commit()
-    return render_template("index.html")
+    db.session.add(todo)                                        # Add a Todo
+    db.session.commit()                                         # Commit all Todos
+    allTodo = Todo.query.all()                                  # Query records
+    return render_template("index.html",allTodos=allTodo)
 
+# Show all Todos
+@app.route('/show')
+def showtodos():
+    allTodo = Todo.query.all()
+    print(allTodo)
+    return "Showing Todos"
+    
 if __name__ == '__main__':
     app.run(debug=True)
