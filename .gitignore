@@ -13,4 +13,9 @@ To see the records open "sqlite viewer" and drag and drop "./instance/todo.db" f
 >> allTodo = Todo.query.all()
 
 Jinja shortcuts
---> jfor -- Jinja For loop
+Jinja2 Snippet Kit : https://vscode.dev/github/SikhakolliShankar/flask_development/blob/mainuson.jinja2-snippet-kit%5Cextension
+Snippets for jinja2
+--> jfor -- Jinja For loo
+
+
+

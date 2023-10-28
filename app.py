@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -18,11 +18,15 @@ class Todo(db.Model):
     def  __repr__(self) -> str:
         return f"{self.sno} - {self.title}"
     
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def htmlfile():
-    todo = Todo(title="First Todo", desc="Invest on time")
-    db.session.add(todo)                                        # Add a Todo
-    db.session.commit()                                         # Commit all Todos
+    if request.method=='POST':
+        title = request.form['title']
+        desc = request.form['desc']
+        todo = Todo(title=title, desc=desc)
+        db.session.add(todo)                                        # Add a Todo
+        db.session.commit()                                         # Commit all Todos
+        
     allTodo = Todo.query.all()                                  # Query records
     return render_template("index.html",allTodos=allTodo)
 
@@ -32,6 +36,20 @@ def showtodos():
     allTodo = Todo.query.all()
     print(allTodo)
     return "Showing Todos"
-    
+
+@app.route('/update/<int:sno>')
+def update():
+    allTodo = Todo.query.all()
+    print(allTodo)
+    return "Showing Todos"
+
+@app.route('/delete/<int:sno>')
+def delete(sno):
+    todo = Todo.query.filter_by(sno=sno).first()
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect('/')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
